@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --azul-institucional: #1e5f8c;
+  --azul-claro: #5ba3d0;
+  --cielo: #93c5fd;
+  --amarillo: #eab308;
+  --verde: #15803d;
+  --tierra: #d4a574;
+  --oscuro: #1c1917;
+}
+
+body {
+  @apply bg-stone-50 text-institucional-oscuro antialiased;
+}
+
+@layer components {
+  .prose-institucional h2 {
+    @apply text-institucional-azul font-semibold text-xl mt-6 mb-3;
+  }
+  .prose-institucional p {
+    @apply text-stone-700 leading-relaxed mb-3;
+  }
+  .prose-institucional ul {
+    @apply list-disc pl-6 mb-3 space-y-1;
+  }
+}
