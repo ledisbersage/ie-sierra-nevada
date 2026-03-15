@@ -20,6 +20,22 @@ export default function JuanYMedioPage() {
         Etnoeducativa Sierra Nevada. Aquí la institución cuenta con una o varias sedes que atienden
         a la población escolar de las comunidades rurales del sector.
       </p>
+      <h2>Sedes en el entorno de Juan y Medio</h2>
+      <p>Según el PEC, las sedes vinculadas a esta zona son:</p>
+      <ul>
+        <li>Juan y Medio</li>
+        <li>El Carmen</li>
+        <li>Los Moreneros</li>
+        <li>Cascajalito</li>
+        <li>Las Colonias</li>
+        <li>La Guillermina</li>
+        <li>Puerto Colombia</li>
+        <li>Las Casitas</li>
+        <li>Contadero</li>
+        <li>El Limón</li>
+        <li>Las Balsas</li>
+        <li>Los Monos</li>
+      </ul>
       <h2>Oferta educativa en la zona</h2>
       <p>
         Las sedes en Juan y Medio ofrecen los niveles que la institución tiene definidos para esta

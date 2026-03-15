@@ -27,7 +27,6 @@ export default function DocumentosPage() {
         <li><strong>Código DANE:</strong> {INSTITUCION.codigoDane}</li>
         <li><strong>NIT:</strong> {INSTITUCION.nit}</li>
         <li><strong>Creada:</strong> {INSTITUCION.creada}</li>
-        <li><strong>Modificada:</strong> {INSTITUCION.modificada}</li>
       </ul>
       <h2>Documentos de referencia</h2>
       <ul>

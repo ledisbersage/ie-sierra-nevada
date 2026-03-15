@@ -17,7 +17,7 @@ export default function DocentesPage() {
     >
       <p>
         Los y las docentes de la Institución Etnoeducativa Sierra Nevada, junto con los directivos
-        docentes, lideran el quehacer pedagógico en las 11 sedes. Su labor se enmarca en el
+        docentes, lideran el quehacer pedagógico en las 13 sedes. Su labor se enmarca en el
         Proyecto Educativo Comunitario (PEC) y en el enfoque etnoeducativo.
       </p>
       <h2>Rol en la institución</h2>

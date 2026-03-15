@@ -20,6 +20,11 @@ export default function LasPalmasPage() {
         Sierra Nevada tiene presencia. Las sedes en esta zona atienden a estudiantes de las
         comunidades rurales en las estribaciones de la Sierra Nevada de Santa Marta.
       </p>
+      <h2>Sede principal en Las Palmas</h2>
+      <p>
+        El PEC reconoce la <strong>Sede Las Palmas</strong> como una de las sedes de la institución,
+        en un territorio con fuerte identidad afro e indígena.
+      </p>
       <h2>Oferta educativa en la zona</h2>
       <p>
         En Las Palmas la institución ofrece los niveles educativos definidos para las sedes del

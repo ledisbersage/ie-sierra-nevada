@@ -28,7 +28,7 @@ export default function BasicaPrimariaPage() {
       </p>
       <h2>Cobertura</h2>
       <p>
-        Básica Primaria se ofrece en varias de las 11 sedes de la institución. Para conocer en qué
+        Básica Primaria se ofrece en varias de las 13 sedes de la institución. Para conocer en qué
         sedes está disponible y los requisitos de matrícula, consulte Sedes Educativas o
         contacte a la institución.
       </p>

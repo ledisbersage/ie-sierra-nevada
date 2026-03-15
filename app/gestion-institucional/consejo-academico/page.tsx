@@ -29,7 +29,7 @@ export default function ConsejoAcademicoPage() {
       </p>
       <h2>Articulación con las sedes</h2>
       <p>
-        El Consejo Académico articula el trabajo pedagógico de las 11 sedes y vela por la
+        El Consejo Académico articula el trabajo pedagógico de las 13 sedes y vela por la
         coherencia entre el PEC, el currículo y las prácticas en el aula.
       </p>
     </PageSection>
