@@ -28,6 +28,11 @@ export default function NoticiasPage() {
             Convocatoria a elecciones del representante de los docentes al Consejo Directivo (10 de marzo de 2026)
           </Link>
         </li>
+        <li>
+          <Link href="/convocatorias/docentes" className="text-institucional-azul hover:underline">
+            Formulario de inscripción para docentes aspirantes
+          </Link>
+        </li>
       </ul>
       <h2>Próximamente</h2>
       <p>

@@ -1,16 +1,16 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import crypto from "crypto";
-import { promises as fs } from "fs";
-import path from "path";
 
-const DATA_PATH = path.join(process.cwd(), "data", "convocatoria-docentes.json");
 const COOKIE_NAME = "iesn_master";
 const MAX_AGE_SECONDS = 60 * 60 * 4;
+const API_BASE = process.env.API_BASE_URL ?? "https://wirelesslink.com.co/api/iesn";
+const API_TOKEN = process.env.API_TOKEN ?? "";
 
 type Registro = {
   id: string;
   createdAt: string;
+  tipoDocumento?: string;
   nombres: string;
   cedula: string;
   expedida: string;
@@ -62,18 +62,17 @@ function isValidToken(token: string, user: string, secret: string) {
   return age >= 0 && age <= MAX_AGE_SECONDS * 1000;
 }
 
-async function readData(): Promise<Registro[]> {
-  try {
-    const raw = await fs.readFile(DATA_PATH, "utf-8");
-    return JSON.parse(raw) as Registro[];
-  } catch {
-    return [];
+async function apiFetch(path: string, options: RequestInit = {}) {
+  const headers: HeadersInit = {
+    "Content-Type": "application/json",
+    ...(options.headers ?? {}),
+  };
+  if (API_TOKEN) {
+    headers.Authorization = `Bearer ${API_TOKEN}`;
   }
-}
-
-async function writeData(data: Registro[]) {
-  await fs.mkdir(path.dirname(DATA_PATH), { recursive: true });
-  await fs.writeFile(DATA_PATH, JSON.stringify(data, null, 2), "utf-8");
+  const res = await fetch(`${API_BASE}${path}`, { ...options, headers, cache: "no-store" });
+  const data = await res.json().catch(() => ({}));
+  return { res, data };
 }
 
 function requireAuth() {
@@ -86,18 +85,14 @@ function requireAuth() {
 export async function PATCH(req: Request, { params }: { params: { id: string } }) {
   if (!requireAuth()) return NextResponse.json({ ok: false }, { status: 401 });
   const body = await req.json();
-  const data = await readData();
-  const idx = data.findIndex((r) => r.id === params.id);
-  if (idx === -1) return NextResponse.json({ ok: false }, { status: 404 });
-
-  data[idx] = {
-    ...data[idx],
-    observaciones: body.observaciones ?? data[idx].observaciones,
-    observacionesTexto: body.observacionesTexto ?? data[idx].observacionesTexto,
-    estado: body.estado ?? data[idx].estado,
-    revisadoPor: body.revisadoPor ?? data[idx].revisadoPor,
-    revisadoAt: new Date().toISOString(),
-  };
-  await writeData(data);
-  return NextResponse.json({ ok: true });
+  const { res, data } = await apiFetch(`/convocatoria-docentes/${params.id}`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      observaciones: body.observaciones ?? undefined,
+      observacionesTexto: body.observacionesTexto ?? undefined,
+      estado: body.estado ?? undefined,
+      revisadoPor: body.revisadoPor ?? undefined,
+    }),
+  });
+  return NextResponse.json({ ok: res.ok, data }, { status: res.status });
 }

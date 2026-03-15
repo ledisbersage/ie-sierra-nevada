@@ -1,16 +1,16 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import crypto from "crypto";
-import { promises as fs } from "fs";
-import path from "path";
 
-const DATA_PATH = path.join(process.cwd(), "data", "convocatoria-docentes.json");
 const COOKIE_NAME = "iesn_master";
 const MAX_AGE_SECONDS = 60 * 60 * 4;
+const API_BASE = process.env.API_BASE_URL ?? "https://wirelesslink.com.co/api/iesn";
+const API_TOKEN = process.env.API_TOKEN ?? "";
 
 type Registro = {
   id: string;
   createdAt: string;
+  tipoDocumento?: string;
   nombres: string;
   cedula: string;
   expedida: string;
@@ -62,18 +62,17 @@ function isValidToken(token: string, user: string, secret: string) {
   return age >= 0 && age <= MAX_AGE_SECONDS * 1000;
 }
 
-async function readData(): Promise<Registro[]> {
-  try {
-    const raw = await fs.readFile(DATA_PATH, "utf-8");
-    return JSON.parse(raw) as Registro[];
-  } catch {
-    return [];
+async function apiFetch(path: string, options: RequestInit = {}) {
+  const headers: HeadersInit = {
+    "Content-Type": "application/json",
+    ...(options.headers ?? {}),
+  };
+  if (API_TOKEN) {
+    headers.Authorization = `Bearer ${API_TOKEN}`;
   }
-}
-
-async function writeData(data: Registro[]) {
-  await fs.mkdir(path.dirname(DATA_PATH), { recursive: true });
-  await fs.writeFile(DATA_PATH, JSON.stringify(data, null, 2), "utf-8");
+  const res = await fetch(`${API_BASE}${path}`, { ...options, headers, cache: "no-store" });
+  const data = await res.json().catch(() => ({}));
+  return { res, data };
 }
 
 function requireAuth() {
@@ -85,16 +84,16 @@ function requireAuth() {
 
 export async function GET() {
   if (!requireAuth()) return NextResponse.json({ ok: false }, { status: 401 });
-  const data = await readData();
-  return NextResponse.json({ ok: true, data });
+  const { res, data } = await apiFetch("/convocatoria-docentes", { method: "GET" });
+  return NextResponse.json({ ok: res.ok, data }, { status: res.status });
 }
 
 export async function POST(req: Request) {
   const body = await req.json();
-  const data = await readData();
-  const registro: Registro = {
+  const payload: Registro = {
     id: crypto.randomUUID(),
     createdAt: new Date().toISOString(),
+    tipoDocumento: body.tipoDocumento ?? "",
     nombres: body.nombres ?? "",
     cedula: body.cedula ?? "",
     expedida: body.expedida ?? "",
@@ -109,7 +108,9 @@ export async function POST(req: Request) {
     declaracionDocumento: body.declaracionDocumento ?? "",
     estado: "pendiente",
   };
-  data.push(registro);
-  await writeData(data);
-  return NextResponse.json({ ok: true, id: registro.id });
+  const { res, data } = await apiFetch("/convocatoria-docentes", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+  return NextResponse.json({ ok: res.ok, data }, { status: res.status });
 }

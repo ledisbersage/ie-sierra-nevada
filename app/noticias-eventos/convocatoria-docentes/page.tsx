@@ -1,4 +1,5 @@
 import PageSection from "@/components/PageSection";
+import Link from "next/link";
 
 export const metadata = {
   title: "Convocatoria Docentes | Noticias y Eventos - IE Sierra Nevada",
@@ -36,6 +37,14 @@ export default function ConvocatoriaDocentesPage() {
         <li>Certificado de antecedentes fiscales.</li>
         <li>Certificado de antecedentes disciplinarios.</li>
       </ul>
+      <div className="mt-6">
+        <Link
+          href="/convocatorias/docentes"
+          className="inline-flex items-center gap-2 rounded-lg bg-institucional-azul px-4 py-2 text-white font-semibold hover:bg-institucional-azulClaro transition"
+        >
+          Ir al formulario de inscripción →
+        </Link>
+      </div>
       <p className="mt-6">
         <strong>Ledis Beatriz Sarmiento Guerra</strong>
         <br />
