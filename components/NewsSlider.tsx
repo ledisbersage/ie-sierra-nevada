@@ -12,7 +12,7 @@ export type NewsItem = {
 };
 
 type NewsSliderProps = {
-  items: NewsItem[];
+  items: readonly NewsItem[];
   autoPlayMs?: number;
 };
 
