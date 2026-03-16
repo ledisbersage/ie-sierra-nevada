@@ -16,6 +16,9 @@
     "react-dom": "^18.3.1",
     "reactflow": "^11.11.4"
   },
+  "overrides": {
+    "@cloudflare/next-on-pages": "1.11.0"
+  },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
