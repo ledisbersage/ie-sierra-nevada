@@ -1,11 +1,12 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import crypto from "crypto";
 
 const COOKIE_NAME = "iesn_master";
 const MAX_AGE_SECONDS = 60 * 60 * 4;
 const API_BASE = process.env.API_BASE_URL ?? "https://wirelesslink.com.co/api/iesn";
 const API_TOKEN = process.env.API_TOKEN ?? "";
+
+export const runtime = "edge";
 
 type Registro = {
   id: string;
@@ -44,18 +45,35 @@ function getEnv() {
   };
 }
 
-function signToken(user: string, ts: string, secret: string) {
-  return crypto.createHash("sha256").update(`${user}:${ts}:${secret}`).digest("hex");
+function constantTimeEqual(a: string, b: string) {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i += 1) {
+    diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  }
+  return diff === 0;
 }
 
-function isValidToken(token: string, user: string, secret: string) {
+async function sha256Hex(input: string) {
+  const data = new TextEncoder().encode(input);
+  const hash = await crypto.subtle.digest("SHA-256", data);
+  return Array.from(new Uint8Array(hash))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+async function signToken(user: string, ts: string, secret: string) {
+  return sha256Hex(`${user}:${ts}:${secret}`);
+}
+
+async function isValidToken(token: string, user: string, secret: string) {
   const parts = token.split(":");
   if (parts.length !== 3) return false;
   const [tUser, ts, sig] = parts;
   if (!tUser || !ts || !sig) return false;
   if (tUser !== user) return false;
-  const expected = signToken(tUser, ts, secret);
-  if (!crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expected))) return false;
+  const expected = await signToken(tUser, ts, secret);
+  if (!constantTimeEqual(sig, expected)) return false;
   const tsNum = Number(ts);
   if (!Number.isFinite(tsNum)) return false;
   const age = Date.now() - tsNum;
@@ -64,9 +82,11 @@ function isValidToken(token: string, user: string, secret: string) {
 
 async function apiFetch(path: string, options: RequestInit = {}) {
   const headers: Record<string, string> = {
-    "Content-Type": "application/json",
     ...(options.headers as Record<string, string> | undefined),
   };
+  if (!(options.body instanceof FormData)) {
+    headers["Content-Type"] = "application/json";
+  }
   if (API_TOKEN) {
     headers["Authorization"] = `Bearer ${API_TOKEN}`;
   }
@@ -75,15 +95,15 @@ async function apiFetch(path: string, options: RequestInit = {}) {
   return { res, data };
 }
 
-function requireAuth() {
+async function requireAuth() {
   const env = getEnv();
   if (!env.user || !env.pass) return false;
   const token = cookies().get(COOKIE_NAME)?.value ?? "";
-  return token ? isValidToken(token, env.user, env.pass) : false;
+  return token ? await isValidToken(token, env.user, env.pass) : false;
 }
 
 export async function PATCH(req: Request, { params }: { params: { id: string } }) {
-  if (!requireAuth()) return NextResponse.json({ ok: false }, { status: 401 });
+  if (!(await requireAuth())) return NextResponse.json({ ok: false }, { status: 401 });
   const body = await req.json();
   const { res, data } = await apiFetch(`/convocatoria-docentes/${params.id}`, {
     method: "PATCH",

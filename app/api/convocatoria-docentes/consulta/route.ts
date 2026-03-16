@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 const API_BASE = process.env.API_BASE_URL ?? "https://wirelesslink.com.co/api/iesn";
 const API_TOKEN = process.env.API_TOKEN ?? "";
 
+export const runtime = "edge";
+
 async function apiFetch(path: string) {
   const headers: Record<string, string> = { "Content-Type": "application/json" };
   if (API_TOKEN) headers["Authorization"] = `Bearer ${API_TOKEN}`;

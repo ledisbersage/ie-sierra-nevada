@@ -1,9 +1,10 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import crypto from "crypto";
 
 const COOKIE_NAME = "iesn_master";
 const MAX_AGE_SECONDS = 60 * 60 * 4; // 4 hours
+
+export const runtime = "edge";
 
 function getEnv() {
   return {
@@ -12,18 +13,35 @@ function getEnv() {
   };
 }
 
-function signToken(user: string, ts: string, secret: string) {
-  return crypto.createHash("sha256").update(`${user}:${ts}:${secret}`).digest("hex");
+function constantTimeEqual(a: string, b: string) {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i += 1) {
+    diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  }
+  return diff === 0;
 }
 
-function isValidToken(token: string, user: string, secret: string) {
+async function sha256Hex(input: string) {
+  const data = new TextEncoder().encode(input);
+  const hash = await crypto.subtle.digest("SHA-256", data);
+  return Array.from(new Uint8Array(hash))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+async function signToken(user: string, ts: string, secret: string) {
+  return sha256Hex(`${user}:${ts}:${secret}`);
+}
+
+async function isValidToken(token: string, user: string, secret: string) {
   const parts = token.split(":");
   if (parts.length !== 3) return false;
   const [tUser, ts, sig] = parts;
   if (!tUser || !ts || !sig) return false;
   if (tUser !== user) return false;
-  const expected = signToken(tUser, ts, secret);
-  if (!crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expected))) return false;
+  const expected = await signToken(tUser, ts, secret);
+  if (!constantTimeEqual(sig, expected)) return false;
   const tsNum = Number(ts);
   if (!Number.isFinite(tsNum)) return false;
   const age = Date.now() - tsNum;
@@ -42,7 +60,7 @@ export async function POST(req: Request) {
   }
 
   const ts = Date.now().toString();
-  const token = `${env.user}:${ts}:${signToken(env.user, ts, env.pass)}`;
+  const token = `${env.user}:${ts}:${await signToken(env.user, ts, env.pass)}`;
   const res = NextResponse.json({ ok: true });
   res.cookies.set(COOKIE_NAME, token, {
     httpOnly: true,
@@ -60,7 +78,7 @@ export async function GET() {
   }
 
   const token = cookies().get(COOKIE_NAME)?.value ?? "";
-  const ok = token ? isValidToken(token, env.user, env.pass) : false;
+  const ok = token ? await isValidToken(token, env.user, env.pass) : false;
   return NextResponse.json({ ok });
 }
 
