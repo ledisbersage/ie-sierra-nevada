@@ -31,7 +31,9 @@ export default function SedePage({ params }: Props) {
     notFound();
   }
 
-  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(sede.mapsQuery)}`;
+  const mapsUrl = sede.coords
+    ? `https://www.google.com/maps?q=${sede.coords.lat},${sede.coords.lng}`
+    : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(sede.mapsQuery)}`;
 
   return (
     <PageSection
