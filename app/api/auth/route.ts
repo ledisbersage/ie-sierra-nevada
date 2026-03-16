@@ -77,7 +77,8 @@ export async function GET() {
     return NextResponse.json({ ok: false, error: "CONFIG_MISSING" }, { status: 500 });
   }
 
-  const token = cookies().get(COOKIE_NAME)?.value ?? "";
+  const cookieStore = await cookies();
+  const token = cookieStore.get(COOKIE_NAME)?.value ?? "";
   const ok = token ? await isValidToken(token, env.user, env.pass) : false;
   return NextResponse.json({ ok });
 }
