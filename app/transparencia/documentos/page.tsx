@@ -1,6 +1,7 @@
 import PageSection from "@/components/PageSection";
 import Link from "next/link";
 import { INSTITUCION } from "@/lib/institucion";
+import { documentosInstitucionales } from "@/data/documentos";
 
 export const metadata = {
   title: "Documentos institucionales | Transparencia - IE Sierra Nevada",
@@ -29,13 +30,21 @@ export default function DocumentosPage() {
         <li><strong>Creada:</strong> {INSTITUCION.creada}</li>
       </ul>
       <h2>Documentos de referencia</h2>
-      <ul>
-        <li>Proyecto Educativo Comunitario (PEC) — <Link href="/gestion-institucional/pec" className="text-institucional-azul hover:underline">Ver resumen</Link></li>
-        <li>Manual de convivencia</li>
-        <li>Calendario escolar vigente — <Link href="/noticias-eventos/calendario" className="text-institucional-azul hover:underline">Ver información</Link></li>
-        <li>Informes de gestión</li>
-        <li>Documentos de contratación (cuando aplique)</li>
-      </ul>
+      <div className="grid md:grid-cols-2 gap-4">
+        {documentosInstitucionales.map((doc) => (
+          <div key={doc.id} className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
+            <p className="text-xs uppercase tracking-wide text-stone-500">{doc.categoria}</p>
+            <h3 className="font-semibold text-institucional-azul mt-1">{doc.titulo}</h3>
+            <p className="text-sm text-stone-600 mt-2">{doc.descripcion}</p>
+            <Link href={doc.archivo} className="inline-flex mt-3 text-sm font-semibold text-institucional-azul hover:underline">
+              Descargar documento →
+            </Link>
+          </div>
+        ))}
+      </div>
+      <p className="text-sm text-stone-500 mt-4">
+        Suba los archivos PDF en la carpeta `public/documentos` con los nombres indicados en el listado.
+      </p>
       <p>
         Los documentos se irán publicando según la disponibilidad y la normativa. Para solicitar
         un documento específico puede contactar a la institución a través del{" "}

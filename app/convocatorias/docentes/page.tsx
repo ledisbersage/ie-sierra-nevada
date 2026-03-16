@@ -167,6 +167,29 @@ export default function ConvocatoriaDocentesFormPage() {
             </div>
           </div>
 
+          <div className="rounded-xl border border-stone-200 bg-stone-50 p-4 space-y-3">
+            <p className="text-sm font-semibold text-stone-700">Términos y Habeas Data</p>
+            <p className="text-sm text-stone-600">
+              Autorizo el tratamiento de mis datos personales conforme a la Ley 1581 de 2012 y el Decreto 1377 de 2013,
+              para fines institucionales relacionados con la convocatoria.
+            </p>
+            <label className="flex items-start gap-2 text-sm text-stone-700">
+              <input name="aceptaHabeasData" type="checkbox" required className="mt-1" />
+              Acepto la política de tratamiento de datos (Habeas Data).
+            </label>
+            <label className="flex items-start gap-2 text-sm text-stone-700">
+              <input name="aceptaTerminos" type="checkbox" required className="mt-1" />
+              Acepto los términos y condiciones de la convocatoria.
+            </label>
+            <p className="text-xs text-stone-500">
+              Puedes consultar la política en la sección de{" "}
+              <Link href="/transparencia/documentos" className="text-institucional-azul hover:underline">
+                Documentos institucionales
+              </Link>
+              .
+            </p>
+          </div>
+
           <button
             type="submit"
             disabled={sending}
