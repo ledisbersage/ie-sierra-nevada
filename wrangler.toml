@@ -1,5 +1,4 @@
 name = "ie-sierra-nevada"
-compatibility_date = "2025-03-16"
-compatibility_flags = ["nodejs_compat"]
+compatibility_date = "2024-11-01"
 
 pages_build_output_dir = ".vercel/output/static"
