@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const COOKIE_NAME = "iesn_master";
 const MAX_AGE_SECONDS = 60 * 60 * 4;
@@ -102,10 +102,11 @@ async function requireAuth() {
   return token ? await isValidToken(token, env.user, env.pass) : false;
 }
 
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+export async function PATCH(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   if (!(await requireAuth())) return NextResponse.json({ ok: false }, { status: 401 });
+  const { id } = await context.params;
   const body = await req.json();
-  const { res, data } = await apiFetch(`/convocatoria-docentes/${params.id}`, {
+  const { res, data } = await apiFetch(`/convocatoria-docentes/${id}`, {
     method: "PATCH",
     body: JSON.stringify({
       observaciones: body.observaciones ?? undefined,
