@@ -1,6 +1,45 @@
 "use client";
 
 import ReactFlow, { Background, Controls, Edge, MiniMap, Node } from "reactflow";
+import type { CSSProperties } from "react";
+
+const hubStyle: CSSProperties = {
+  background: "#e6f2fb",
+  border: "2px solid #1e5f8c",
+  color: "#0f172a",
+  width: 200,
+  height: 70,
+  borderRadius: 16,
+  fontWeight: 600,
+  textAlign: "center",
+  whiteSpace: "pre-line",
+  boxShadow: "0 12px 30px rgba(30,95,140,0.15)",
+};
+
+const bachilleratoStyle: CSSProperties = {
+  background: "#ecf6ed",
+  border: "2px solid #2e7d32",
+  color: "#0f172a",
+  width: 220,
+  height: 70,
+  borderRadius: 16,
+  fontWeight: 600,
+  textAlign: "center",
+  whiteSpace: "pre-line",
+  boxShadow: "0 12px 30px rgba(46,125,50,0.15)",
+};
+
+const nodeStyle: CSSProperties = {
+  background: "#ffffff",
+  border: "1px solid #e2e8f0",
+  color: "#0f172a",
+  width: 200,
+  height: 38,
+  borderRadius: 12,
+  fontSize: 13,
+  textAlign: "center",
+  boxShadow: "0 6px 18px rgba(15,23,42,0.08)",
+};
 
 const nodes: Node[] = [
   {
@@ -8,42 +47,16 @@ const nodes: Node[] = [
     type: "default",
     position: { x: 40, y: 210 },
     data: { label: "Juan y Medio\nSede principal" },
-    style: {
-      background: "#e6f2fb",
-      border: "2px solid #1e5f8c",
-      color: "#0f172a",
-      width: 200,
-      height: 70,
-      borderRadius: 16,
-      fontWeight: 600,
-      textAlign: "center",
-      whiteSpace: "pre-line",
-      boxShadow: "0 12px 30px rgba(30,95,140,0.15)",
-    },
+    style: hubStyle,
   },
   {
     id: "cascajalito",
     type: "default",
     position: { x: 700, y: 210 },
     data: { label: "Cascajalito\nBachillerato (6°-11°)" },
-    style: {
-      background: "#ecf6ed",
-      border: "2px solid #2e7d32",
-      color: "#0f172a",
-      width: 220,
-      height: 70,
-      borderRadius: 16,
-      fontWeight: 600,
-      textAlign: "center",
-      whiteSpace: "pre-line",
-      boxShadow: "0 12px 30px rgba(46,125,50,0.15)",
-    },
+    style: bachilleratoStyle,
   },
-  {
-    id: "el-carmen",
-    position: { x: 320, y: 40 },
-    data: { label: "El Carmen" },
-  },
+  { id: "el-carmen", position: { x: 320, y: 40 }, data: { label: "El Carmen" } },
   { id: "moreneros", position: { x: 320, y: 95 }, data: { label: "Los Moreneros" } },
   { id: "colonias", position: { x: 320, y: 150 }, data: { label: "Las Colonias" } },
   { id: "guillermina", position: { x: 320, y: 205 }, data: { label: "La Guillermina" } },
@@ -59,17 +72,7 @@ const nodes: Node[] = [
     ? node
     : {
         ...node,
-        style: {
-          background: "#ffffff",
-          border: "1px solid #e2e8f0",
-          color: "#0f172a",
-          width: 200,
-          height: 38,
-          borderRadius: 12,
-          fontSize: 13,
-          textAlign: "center",
-          boxShadow: "0 6px 18px rgba(15,23,42,0.08)",
-        },
+        style: nodeStyle,
       }
 );
 
