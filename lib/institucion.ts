@@ -1,19 +1,19 @@
-﻿/** Datos institucionales extraídos del PEC - Institución Etnoeducativa Sierra Nevada */
+/** Datos institucionales extraídos del PEC - Institución Etnoeducativa Sierra Nevada */
 
 export const INSTITUCION = {
   nombre: "Institución Etnoeducativa Sierra Nevada",
   nombreCorto: "IE Sierra Nevada",
   modelo: "Modelo Etnoeducativo e Intercultural — Tejiendo Saberes en Contexto",
-  creada: "Decreto 057 de 2009",
-  codigoDane: "244001802780 (Sede Juan y Medio)",
+  creada: "Decreto 023 del 5 de febrero de 2016 (modificada parcialmente por el Decreto 0110 del 15 de julio de 2016, antecedida por el Decreto 247 de 2002 como centro y el Decreto 057 de 2009 como centro etnoeducativo)",
+  codigoDane: "244001002780",
   nit: "825003146-3",
   caracter: "Oficial, mixto",
-  jornadas: "Mañana y sabatino",
+  jornadas: "Mañana, única y sabatino",
   niveles:
-    "Preescolar, básica primaria, básica secundaria, media académica y educación para adultos por ciclos lectivos especiales integrados (CLEI)",
+    "Prejardín, jardín, transición, básica primaria, básica secundaria, media académica, aceleración del aprendizaje y educación de adultos por ciclos lectivos especiales integrados (CLEI)",
   ubicacion:
-    "Corregimientos de Juan y Medio y Las Palmas, Distrito Turístico y Cultural de Riohacha, La Guajira",
-  secretariaEducacion: "Secretaría de Educación Municipal de Riohacha",
+    "Corregimientos de Juan y Medio y Las Palmas, sur occidente del Distrito Turístico y Cultural de Riohacha, La Guajira",
+  secretariaEducacion: "Secretaría de Educación del Distrito Turístico y Cultural de Riohacha",
 } as const;
 
 export const RECTOR = {

@@ -1,3 +1,5 @@
+import { sedesNavItems } from "@/data/sedes";
+
 export type NavItem = {
   label: string;
   href?: string;
@@ -31,16 +33,14 @@ export const mainNav: NavItem[] = [
     ],
   },
   {
-    label: "Sedes Educativas",
+    label: "Sedes",
     children: [
       { label: "Mapa de sedes", href: "/sedes-educativas/mapa" },
-      { label: "Juan y Medio", href: "/sedes-educativas/juan-y-medio" },
-      { label: "Las Palmas", href: "/sedes-educativas/las-palmas" },
-      { label: "Otras sedes", href: "/sedes-educativas/otras-sedes" },
+      ...sedesNavItems,
     ],
   },
   {
-    label: "Comunidad Educativa",
+    label: "Comunidad",
     children: [
       { label: "Estudiantes", href: "/comunidad-educativa/estudiantes" },
       { label: "Padres de familia", href: "/comunidad-educativa/padres" },
@@ -49,9 +49,9 @@ export const mainNav: NavItem[] = [
     ],
   },
   {
-    label: "Gestión Institucional",
+    label: "Gestión",
     children: [
-      { label: "Proyecto Educativo Comunitario (PEC)", href: "/gestion-institucional/pec" },
+      { label: "PEC", href: "/gestion-institucional/pec" },
       { label: "Manual de convivencia", href: "/gestion-institucional/manual-convivencia" },
       { label: "Gobierno escolar", href: "/gestion-institucional/gobierno-escolar" },
       { label: "Consejo Directivo", href: "/gestion-institucional/consejo-directivo" },
@@ -59,28 +59,14 @@ export const mainNav: NavItem[] = [
     ],
   },
   {
-    label: "Noticias y Eventos",
+    label: "Más",
     children: [
       { label: "Noticias", href: "/noticias-eventos/noticias" },
       { label: "Actividades", href: "/noticias-eventos/actividades" },
       { label: "Calendario escolar", href: "/noticias-eventos/calendario" },
-    ],
-  },
-  {
-    label: "Transparencia",
-    children: [
-      { label: "Contratación", href: "/transparencia/contratacion" },
-      { label: "Informes", href: "/transparencia/informes" },
-      { label: "Rendición de cuentas", href: "/transparencia/rendicion-cuentas" },
-      { label: "Documentos institucionales", href: "/transparencia/documentos" },
-    ],
-  },
-  {
-    label: "Contacto",
-    children: [
-      { label: "Ubicación", href: "/contacto/ubicacion" },
-      { label: "Formulario", href: "/contacto/formulario" },
-      { label: "Teléfonos", href: "/contacto/telefonos" },
+      { label: "Transparencia", href: "/transparencia/documentos" },
+      { label: "Atención al ciudadano", href: "/contacto/formulario" },
+      { label: "Ubicación y teléfonos", href: "/contacto/ubicacion" },
     ],
   },
 ];

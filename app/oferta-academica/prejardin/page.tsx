@@ -14,6 +14,8 @@ export default function PrejardinPage() {
         { label: "Oferta Académica", href: "/oferta-academica/prejardin" },
         { label: "Prejardín" },
       ]}
+      imageSrc="/demo-slide-3.svg"
+      imageAlt="Niños y niñas en actividades lúdicas"
     >
       <p>
         El nivel de Prejardín en la Institución Etnoeducativa Sierra Nevada ofrece a los más

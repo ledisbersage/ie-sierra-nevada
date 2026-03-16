@@ -54,7 +54,7 @@ export default function Header() {
   return (
     <>
       <header className="sticky top-0 z-40 bg-white border-b border-stone-200 shadow-sm">
-        <div className="max-w-6xl mx-auto px-4 flex flex-wrap items-center justify-between gap-4 py-3">
+        <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:flex-nowrap items-center md:items-center justify-between gap-4 py-3">
           <Link href="/" className="flex items-center gap-3">
             {!logoError ? (
               <span className="relative flex-shrink-0 w-12 h-12 md:w-14 md:h-14">
@@ -77,12 +77,12 @@ export default function Header() {
               Institución Etnoeducativa Sierra Nevada
             </span>
           </Link>
-          <nav className="flex flex-wrap items-center gap-1">
+          <nav className="flex flex-wrap md:flex-nowrap items-center gap-1 md:justify-center md:flex-1">
             {mainNav.map((item) => (
               <NavDropdown key={item.label} item={item} />
             ))}
           </nav>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             <label className="sr-only" htmlFor="search-header">
               Buscar en la institución
             </label>

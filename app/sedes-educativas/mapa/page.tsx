@@ -1,10 +1,12 @@
 import PageSection from "@/components/PageSection";
 import Link from "next/link";
+import Image from "next/image";
 import SedesDiagram from "@/components/SedesDiagram";
+import { sedes, sedesCount } from "@/data/sedes";
 
 export const metadata = {
   title: "Mapa de sedes | Sedes Educativas - IE Sierra Nevada",
-  description: "Mapa y listado de las 13 sedes de la IE Sierra Nevada.",
+  description: "Mapa y organización de las sedes de la IE Sierra Nevada.",
 };
 
 export default function MapaSedesPage() {
@@ -18,10 +20,10 @@ export default function MapaSedesPage() {
       ]}
     >
       <p>
-        La Institución Etnoeducativa Sierra Nevada está conformada por 13 sedes educativas
-        dispersas en el territorio del distrito de Riohacha, en las estribaciones de la Sierra
-        Nevada de Santa Marta. Atienden a estudiantes de comunidades afrocolombianas, indígenas y
-        mestizas de la región.
+        La Institución Etnoeducativa Sierra Nevada está conformada por {sedesCount} sedes educativas
+        ubicadas en comunidades rurales y dispersas del distrito de Riohacha, en las estribaciones
+        de la Sierra Nevada de Santa Marta. Atienden a estudiantes de comunidades afrocolombianas,
+        indígenas y mestizas de la región.
       </p>
       <h2>Corregimientos y presencia</h2>
       <p>
@@ -31,21 +33,13 @@ export default function MapaSedesPage() {
       </p>
       <h2>Enlaces por sede</h2>
       <ul>
-        <li>
-          <Link href="/sedes-educativas/juan-y-medio" className="text-institucional-azul hover:underline">
-            Sedes en Juan y Medio
-          </Link>
-        </li>
-        <li>
-          <Link href="/sedes-educativas/las-palmas" className="text-institucional-azul hover:underline">
-            Sedes en Las Palmas
-          </Link>
-        </li>
-        <li>
-          <Link href="/sedes-educativas/otras-sedes" className="text-institucional-azul hover:underline">
-            Otras sedes
-          </Link>
-        </li>
+        {sedes.map((sede) => (
+          <li key={sede.slug}>
+            <Link href={`/sedes-educativas/${sede.slug}`} className="text-institucional-azul hover:underline">
+              {sede.nombre}
+            </Link>
+          </li>
+        ))}
       </ul>
       <h2>Mapa institucional (referencial)</h2>
       <p>
@@ -66,22 +60,23 @@ export default function MapaSedesPage() {
           </span>
         </div>
       </div>
-      <h2>Listado de sedes (PEC)</h2>
-      <ul>
-        <li>Juan y Medio (Sede principal)</li>
-        <li>El Carmen</li>
-        <li>Los Moreneros</li>
-        <li>Cascajalito (Bachillerato)</li>
-        <li>Las Colonias</li>
-        <li>La Guillermina</li>
-        <li>Las Palmas</li>
-        <li>Puerto Colombia</li>
-        <li>Las Casitas</li>
-        <li>Contadero</li>
-        <li>El Limón</li>
-        <li>Las Balsas</li>
-        <li>Los Monos</li>
-      </ul>
+      <h2>Listado de sedes</h2>
+      <div className="grid md:grid-cols-2 gap-4">
+        {sedes.map((sede) => (
+          <Link
+            key={sede.slug}
+            href={`/sedes-educativas/${sede.slug}`}
+            className="group rounded-2xl border border-stone-200 bg-white p-4 shadow-sm hover:shadow-md transition"
+          >
+            <div className="relative h-32 rounded-xl overflow-hidden mb-3">
+              <Image src={sede.imagenes[0]} alt={sede.nombre} fill className="object-cover" />
+            </div>
+            <h3 className="font-semibold text-institucional-azul group-hover:underline">{sede.nombre}</h3>
+            <p className="text-sm text-stone-600">Código DANE: {sede.codigoDane}</p>
+            <p className="text-sm text-stone-600">Jornadas: {sede.jornadas.join(", ")}</p>
+          </Link>
+        ))}
+      </div>
     </PageSection>
   );
 }

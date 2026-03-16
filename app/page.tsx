@@ -2,72 +2,62 @@ import Link from "next/link";
 import Image from "next/image";
 import HeroLogo from "@/components/HeroLogo";
 import { INSTITUCION } from "@/lib/institucion";
+import { sedesCount } from "@/data/sedes";
 import NewsSlider from "@/components/NewsSlider";
 
+const DESTACADOS = [
+  {
+    title: "Gestión educativa",
+    desc: "Seguimiento al aprendizaje, bienestar estudiantil y participación familiar.",
+    href: "/noticias-eventos/noticias",
+    image: "/demo-slide-2.svg",
+  },
+  {
+    title: "Proyecto pedagógico",
+    desc: "Aulas vivas, lectura, arte y desarrollo de habilidades socioemocionales.",
+    href: "/oferta-academica/prejardin",
+    image: "/demo-slide-3.svg",
+  },
+  {
+    title: "Comunidad activa",
+    desc: "Encuentros culturales, trabajo comunitario y liderazgo juvenil.",
+    href: "/sedes-educativas/mapa",
+    image: "/demo-slide-1.svg",
+  },
+] as const;
+
+const GALERIA = ["/demo-slide-1.svg", "/demo-slide-2.svg", "/demo-slide-3.svg", "/demo-slide-2.svg"] as const;
+
+const NOTICIAS = [
+  {
+    title: "Jornada de lectura y escritura en las sedes rurales",
+    excerpt:
+      "Espacios de lectura en aula y biblioteca para fortalecer comprensión, creatividad y pensamiento crítico.",
+    href: "/noticias-eventos/noticias",
+    image: "/demo-slide-1.svg",
+  },
+  {
+    title: "Bienestar escolar y ambientes protectores",
+    excerpt:
+      "Estrategias de convivencia, salud mental y prevención de riesgos con participación de familias y docentes.",
+    href: "/noticias-eventos/noticias",
+    image: "/demo-slide-2.svg",
+  },
+  {
+    title: "Fortalecimiento de la educación rural",
+    excerpt:
+      "Acciones para mejorar permanencia, recursos pedagógicos y participación comunitaria en las sedes.",
+    href: "/noticias-eventos/noticias",
+    image: "/demo-slide-3.svg",
+  },
+] as const;
+
 export default function HomePage() {
-  const destacados = [
-    {
-      title: "Gestión Educativa",
-      desc: "Seguimiento al aprendizaje, bienestar estudiantil y participación familiar.",
-      href: "/noticias-eventos/noticias",
-      image: "/fotos/IMG-20231120-WA0042.jpg",
-    },
-    {
-      title: "Proyecto Pedagógico",
-      desc: "Aulas vivas, lectura, arte y desarrollo de habilidades socioemocionales.",
-      href: "/oferta-academica/prejardin",
-      image: "/fotos/IMG-20231124-WA0099.jpg",
-    },
-    {
-      title: "Comunidad Activa",
-      desc: "Encuentros culturales, trabajo comunitario y liderazgo juvenil.",
-      href: "/sedes-educativas/mapa",
-      image: "/fotos/IMG-20231123-WA0034.jpg",
-    },
-  ];
-
-  const galeria = [
-    "/fotos/IMG-20230906-WA0060.jpg",
-    "/fotos/IMG-20230907-WA0048.jpg",
-    "/fotos/IMG-20230918-WA0057.jpg",
-    "/fotos/IMG-20231123-WA0032.jpg",
-  ];
-
-  const noticias = [
-    {
-      title: "Jornada nacional por la lectura y la escritura",
-      excerpt:
-        "El Ministerio impulsa espacios de lectura en aula y biblioteca para fortalecer comprensión, creatividad y pensamiento crítico.",
-      href: "/noticias-eventos/noticias",
-      image: "/fotos/IMG-20231114-WA0045.jpg",
-    },
-    {
-      title: "Bienestar escolar y ambientes protectores",
-      excerpt:
-        "Estrategias para convivencia, salud mental y prevención de riesgos, con participación de familias y docentes.",
-      href: "/noticias-eventos/noticias",
-      image: "/fotos/IMG-20231130-WA0072.jpg",
-    },
-    {
-      title: "Fortalecimiento de la educación rural",
-      excerpt:
-        "Acciones para mejorar infraestructura, permanencia y acceso a recursos pedagógicos en sedes rurales.",
-      href: "/noticias-eventos/noticias",
-      image: "/fotos/IMG_20240319_124229.jpg",
-    },
-  ];
-
   return (
     <div>
       <section className="relative overflow-hidden text-white">
         <div className="absolute inset-0">
-          <Image
-            src="/fotos/IMG_20240319_123815.jpg"
-            alt="Estudiantes de la institución"
-            fill
-            className="object-cover"
-            priority
-          />
+          <Image src="/demo-slide-1.svg" alt="Banner institucional" fill className="object-cover" priority />
           <div className="absolute inset-0 bg-gradient-to-r from-institucional-azul/95 via-institucional-azul/70 to-transparent" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(234,179,8,0.35),_transparent_55%)]" />
         </div>
@@ -133,7 +123,7 @@ export default function HomePage() {
             </div>
 
             <aside className="space-y-4 animate-fade-left">
-              <NewsSlider items={noticias} />
+              <NewsSlider items={NOTICIAS} />
               <div className="glass-card rounded-2xl p-4">
                 <p className="font-semibold text-institucional-azul text-sm mb-1">
                   ¿Eres estudiante nuevo?
@@ -192,7 +182,7 @@ export default function HomePage() {
           </div>
         </div>
         <div className="grid lg:grid-cols-3 gap-6">
-          {destacados.map((item, index) => (
+          {DESTACADOS.map((item, index) => (
             <Link
               key={item.title}
               href={item.href}
@@ -200,7 +190,7 @@ export default function HomePage() {
               style={{ animationDelay: `${index * 120}ms` }}
             >
               <div className="relative h-44">
-                <Image src={item.image} alt={item.title} fill className="object-cover" />
+              <Image src={item.image} alt={item.title} fill className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
               </div>
               <div className="p-5 space-y-2">
@@ -250,7 +240,7 @@ export default function HomePage() {
           <div className="relative animate-fade-left">
             <div className="absolute -top-6 -left-6 w-20 h-20 rounded-full bg-institucional-amarillo/30 animate-float" />
             <div className="relative h-80 rounded-3xl overflow-hidden shadow-2xl animate-fade-up">
-              <Image src="/fotos/IMG-20231109-WA0106.jpg" alt="Comunidad educativa" fill className="object-cover" />
+              <Image src="/demo-slide-2.svg" alt="Comunidad educativa" fill className="object-cover" />
             </div>
             <div className="absolute -bottom-4 right-6 px-4 py-2 rounded-full bg-institucional-verde text-white text-sm shadow-lg">
               Comunidad activa
@@ -261,12 +251,12 @@ export default function HomePage() {
 
       <section className="max-w-6xl mx-auto px-4 py-14">
         <div className="relative h-44 rounded-3xl overflow-hidden shadow-lg mb-8 animate-fade-up">
-          <Image src="/fotos/IMG-20231123-WA0031.jpg" alt="Vida escolar" fill className="object-cover" />
+          <Image src="/demo-slide-3.svg" alt="Vida escolar" fill className="object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-institucional-azul/70 via-transparent to-transparent" />
         </div>
         <div className="grid md:grid-cols-3 gap-6 text-center">
           {[
-            { label: "Sedes educativas", value: "13" },
+            { label: "Sedes educativas", value: `${sedesCount}` },
             { label: "Enfoque", value: "Intercultural" },
             { label: "Énfasis", value: "Agropecuario" },
           ].map((stat, index) => (
@@ -293,7 +283,7 @@ export default function HomePage() {
           </Link>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {galeria.map((img, index) => (
+          {GALERIA.map((img, index) => (
             <div key={`${img}-${index}`} className="relative h-40 rounded-2xl overflow-hidden shadow-md">
               <Image src={img} alt="Galería institucional" fill className="object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
@@ -310,7 +300,7 @@ export default function HomePage() {
                 Niveles educativos
               </h2>
               <div className="relative h-36 rounded-2xl overflow-hidden shadow-md mb-4 animate-fade-up">
-                <Image src="/fotos/IMG-20231124-WA0098.jpg" alt="Aula en la institución" fill className="object-cover" />
+                <Image src="/demo-slide-1.svg" alt="Aula en la institución" fill className="object-cover" />
               </div>
               <ul className="space-y-2">
                 {["Prejardín", "Jardín", "Transición", "Básica Primaria", "Básica Secundaria", "Media Académica"].map(
@@ -332,7 +322,7 @@ export default function HomePage() {
                 Accesos rápidos
               </h2>
               <div className="relative h-36 rounded-2xl overflow-hidden shadow-md mb-4 animate-fade-up">
-                <Image src="/fotos/IMG-20231109-WA0107.jpg" alt="Comunidad educativa" fill className="object-cover" />
+                <Image src="/demo-slide-2.svg" alt="Comunidad educativa" fill className="object-cover" />
               </div>
               <ul className="space-y-2">
                 <li>

@@ -1,0 +1,31 @@
+<svg width="1200" height="600" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g3" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1e40af"/>
+      <stop offset="50%" stop-color="#1e5f8c"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#g3)"/>
+  <rect x="120" y="120" width="420" height="320" rx="36" fill="#f9fafb" opacity="0.96"/>
+  <text x="150" y="180" font-family="system-ui, -apple-system, BlinkMacSystemFont" font-size="26" fill="#111827" font-weight="600">
+    Educación rural con identidad
+  </text>
+  <text x="150" y="220" font-family="system-ui, -apple-system, BlinkMacSystemFont" font-size="18" fill="#374151">
+    Acompañamos a comunidades campesinas e indígenas
+  </text>
+  <text x="150" y="246" font-family="system-ui, -apple-system, BlinkMacSystemFont" font-size="18" fill="#374151">
+    de la Sierra Nevada, con énfasis agropecuario,
+  </text>
+  <text x="150" y="272" font-family="system-ui, -apple-system, BlinkMacSystemFont" font-size="18" fill="#374151">
+    pertinencia cultural e interculturalidad.
+  </text>
+  <rect x="150" y="310" width="200" height="44" rx="22" fill="#1e5f8c"/>
+  <text x="172" y="339" font-family="system-ui, -apple-system, BlinkMacSystemFont" font-size="18" fill="#f9fafb">
+    Conoce nuestras sedes
+  </text>
+  <path d="M620 420 C700 360 800 340 900 350 C1020 364 1100 390 1160 420 L1160 600 L620 600 Z" fill="#052e16" opacity="0.9"/>
+  <circle cx="780" cy="180" r="80" fill="#facc15" opacity="0.85"/>
+  <circle cx="960" cy="140" r="40" fill="#93c5fd" opacity="0.9"/>
+</svg>
+

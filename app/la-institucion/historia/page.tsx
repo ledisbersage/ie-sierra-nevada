@@ -1,4 +1,5 @@
 import PageSection from "@/components/PageSection";
+import { sedes } from "@/data/sedes";
 import { INSTITUCION, ORIGEN_NOMBRE } from "@/lib/institucion";
 
 export const metadata = {
@@ -15,6 +16,8 @@ export default function HistoriaPage() {
         { label: "La Institución", href: "/la-institucion/historia" },
         { label: "Historia" },
       ]}
+      imageSrc="/demo-slide-1.svg"
+      imageAlt="Paisaje de la Sierra Nevada de Santa Marta"
     >
       <p>
         La Institución Etnoeducativa Sierra Nevada fue reconocida mediante{" "}
@@ -38,25 +41,22 @@ export default function HistoriaPage() {
         acceso y la permanencia escolar en las veredas.
       </p>
       <h2>Sedes que la conforman</h2>
-      <p>Según el PEC, la institución está conformada por las siguientes sedes:</p>
+      <p>
+        La institución cuenta con sedes educativas ubicadas en comunidades rurales y dispersas de los corregimientos de
+        Juan y Medio y Las Palmas. Esta presencia territorial permite garantizar el derecho a la educación de niñas,
+        niños, adolescentes, jóvenes y adultos en contextos rurales, atendiendo comunidades indígenas,
+        afrodescendientes, campesinas, población migrante y desplazada.
+      </p>
       <ul>
-        <li>Juan y Medio</li>
-        <li>El Carmen</li>
-        <li>Los Moreneros</li>
-        <li>Cascajalito</li>
-        <li>Las Colonias</li>
-        <li>La Guillermina</li>
-        <li>Las Palmas</li>
-        <li>Puerto Colombia</li>
-        <li>Las Casitas</li>
-        <li>Contadero</li>
-        <li>El Limón</li>
-        <li>Las Balsas</li>
-        <li>Los Monos</li>
+        {sedes.map((sede) => (
+          <li key={sede.slug}>{sede.nombre}</li>
+        ))}
       </ul>
       <p>
-        Esta presencia territorial permite atender comunidades afrocolombianas, indígenas y mestizas, fortaleciendo la
-        identidad cultural y la convivencia intercultural en el marco del Proyecto Educativo Comunitario (PEC).
+        Desde su conformación como centro educativo (Decreto 247 de 2002), su conversión a centro etnoeducativo
+        (Decreto 057 de 2009) y su reconocimiento como Institución Etnoeducativa (Decreto 023 de 2016), la Sierra
+        Nevada ha fortalecido un proyecto pedagógico intercultural que integra los saberes ancestrales y los
+        conocimientos universales al servicio del territorio.
       </p>
     </PageSection>
   );

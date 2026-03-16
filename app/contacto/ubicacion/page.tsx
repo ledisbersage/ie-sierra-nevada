@@ -1,5 +1,6 @@
 import PageSection from "@/components/PageSection";
 import { INSTITUCION } from "@/lib/institucion";
+import { sedesCount } from "@/data/sedes";
 
 export const metadata = {
   title: "Ubicación | Contacto - IE Sierra Nevada",
@@ -17,7 +18,7 @@ export default function UbicacionPage() {
       ]}
     >
       <p>
-        La {INSTITUCION.nombre} tiene su ámbito de acción en el {INSTITUCION.ubicacion}. Las 13 sedes
+        La {INSTITUCION.nombre} tiene su ámbito de acción en el {INSTITUCION.ubicacion}. Las {sedesCount} sedes
         educativas se encuentran en zonas rurales de las estribaciones de la Sierra Nevada de Santa Marta.
       </p>
       <h2>Corregimientos</h2>
