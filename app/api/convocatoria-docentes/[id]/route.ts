@@ -63,12 +63,12 @@ function isValidToken(token: string, user: string, secret: string) {
 }
 
 async function apiFetch(path: string, options: RequestInit = {}) {
-  const headers: HeadersInit = {
+  const headers: Record<string, string> = {
     "Content-Type": "application/json",
-    ...(options.headers ?? {}),
+    ...(options.headers as Record<string, string> | undefined),
   };
   if (API_TOKEN) {
-    headers.Authorization = `Bearer ${API_TOKEN}`;
+    headers["Authorization"] = `Bearer ${API_TOKEN}`;
   }
   const res = await fetch(`${API_BASE}${path}`, { ...options, headers, cache: "no-store" });
   const data = await res.json().catch(() => ({}));

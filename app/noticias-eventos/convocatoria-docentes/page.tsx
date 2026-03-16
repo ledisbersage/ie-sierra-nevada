@@ -44,6 +44,12 @@ export default function ConvocatoriaDocentesPage() {
         >
           Ir al formulario de inscripción →
         </Link>
+        <Link
+          href="/convocatorias/docentes/consulta"
+          className="ml-3 inline-flex items-center gap-2 rounded-lg border border-institucional-azul px-4 py-2 text-institucional-azul font-semibold hover:bg-institucional-azul/10 transition"
+        >
+          Consultar estado →
+        </Link>
       </div>
       <p className="mt-6">
         <strong>Ledis Beatriz Sarmiento Guerra</strong>

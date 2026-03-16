@@ -63,12 +63,12 @@ function isValidToken(token: string, user: string, secret: string) {
 }
 
 async function apiFetch(path: string, options: RequestInit = {}) {
-  const headers: HeadersInit = {
+  const headers: Record<string, string> = {
     "Content-Type": "application/json",
-    ...(options.headers ?? {}),
+    ...(options.headers as Record<string, string> | undefined),
   };
   if (API_TOKEN) {
-    headers.Authorization = `Bearer ${API_TOKEN}`;
+    headers["Authorization"] = `Bearer ${API_TOKEN}`;
   }
   const res = await fetch(`${API_BASE}${path}`, { ...options, headers, cache: "no-store" });
   const data = await res.json().catch(() => ({}));
@@ -89,28 +89,47 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const body = await req.json();
+  const form = await req.formData();
   const payload: Registro = {
     id: crypto.randomUUID(),
     createdAt: new Date().toISOString(),
-    tipoDocumento: body.tipoDocumento ?? "",
-    nombres: body.nombres ?? "",
-    cedula: body.cedula ?? "",
-    expedida: body.expedida ?? "",
-    cargo: body.cargo ?? "",
-    area: body.area ?? "",
-    sede: body.sede ?? "",
-    tiempoServicio: body.tiempoServicio ?? "",
-    email: body.email ?? "",
-    telefono: body.telefono ?? "",
-    propuesta: body.propuesta ?? "",
-    declaracionNombre: body.declaracionNombre ?? "",
-    declaracionDocumento: body.declaracionDocumento ?? "",
+    tipoDocumento: String(form.get("tipoDocumento") ?? ""),
+    nombres: String(form.get("nombres") ?? ""),
+    cedula: String(form.get("cedula") ?? ""),
+    expedida: String(form.get("expedida") ?? ""),
+    cargo: String(form.get("cargo") ?? ""),
+    area: String(form.get("area") ?? ""),
+    sede: String(form.get("sede") ?? ""),
+    tiempoServicio: String(form.get("tiempoServicio") ?? ""),
+    email: String(form.get("email") ?? ""),
+    telefono: String(form.get("telefono") ?? ""),
+    propuesta: String(form.get("propuesta") ?? ""),
+    declaracionNombre: String(form.get("declaracionNombre") ?? ""),
+    declaracionDocumento: String(form.get("declaracionDocumento") ?? ""),
     estado: "pendiente",
   };
+
+  const outbound = new FormData();
+  Object.entries(payload).forEach(([key, value]) => outbound.append(key, value as string));
+
+  const fileFields = [
+    "anexoCedula",
+    "anexoCertificadoDocente",
+    "anexoJudiciales",
+    "anexoFiscales",
+    "anexoDisciplinarios",
+  ];
+  for (const field of fileFields) {
+    const file = form.get(field);
+    if (file instanceof File) {
+      outbound.append(field, file, file.name);
+    }
+  }
+
   const { res, data } = await apiFetch("/convocatoria-docentes", {
     method: "POST",
-    body: JSON.stringify(payload),
+    body: outbound,
+    headers: API_TOKEN ? { Authorization: `Bearer ${API_TOKEN}` } : undefined,
   });
   return NextResponse.json({ ok: res.ok, data }, { status: res.status });
 }

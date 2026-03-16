@@ -4,8 +4,8 @@ const API_BASE = process.env.API_BASE_URL ?? "https://wirelesslink.com.co/api/ie
 const API_TOKEN = process.env.API_TOKEN ?? "";
 
 async function apiFetch(path: string) {
-  const headers: HeadersInit = { "Content-Type": "application/json" };
-  if (API_TOKEN) headers.Authorization = `Bearer ${API_TOKEN}`;
+  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  if (API_TOKEN) headers["Authorization"] = `Bearer ${API_TOKEN}`;
   const res = await fetch(`${API_BASE}${path}`, { headers, cache: "no-store" });
   const data = await res.json().catch(() => ({}));
   return { res, data };

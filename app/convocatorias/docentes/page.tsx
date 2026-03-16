@@ -4,12 +4,6 @@ import PageSection from "@/components/PageSection";
 import Link from "next/link";
 import { useState } from "react";
 
-export const metadata = {
-  title: "Inscripción Docentes | Convocatorias - IE Sierra Nevada",
-  description:
-    "Inscripción de candidatos a representante de los docentes al Consejo Directivo de la IE Sierra Nevada.",
-};
-
 export default function ConvocatoriaDocentesFormPage() {
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState<string | null>(null);
@@ -21,13 +15,10 @@ export default function ConvocatoriaDocentesFormPage() {
     setError(null);
     setSent(null);
     const form = event.currentTarget;
-    const formData = new FormData(form);
-    const payload = Object.fromEntries(formData.entries());
     try {
       const res = await fetch("/api/convocatoria-docentes", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: new FormData(form),
       });
       const data = await res.json();
       if (!res.ok || !data.ok) {
@@ -148,6 +139,32 @@ export default function ConvocatoriaDocentesFormPage() {
               Declaro que cumplo los requisitos del Gobierno Escolar, me comprometo a representar de manera
               responsable al cuerpo docente y manifiesto ausencia de inhabilidades o conflicto de intereses.
             </p>
+          </div>
+
+          <div className="rounded-xl border border-stone-200 bg-white p-4">
+            <p className="text-sm font-semibold text-stone-700 mb-3">Anexos obligatorios (PDF)</p>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <label className="text-sm font-medium text-stone-700">Fotocopia de cédula ampliada (PDF)</label>
+                <input name="anexoCedula" type="file" accept="application/pdf" required className="mt-1 w-full" />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-stone-700">Certificado de docente (PDF)</label>
+                <input name="anexoCertificadoDocente" type="file" accept="application/pdf" required className="mt-1 w-full" />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-stone-700">Antecedentes judiciales (PDF)</label>
+                <input name="anexoJudiciales" type="file" accept="application/pdf" required className="mt-1 w-full" />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-stone-700">Antecedentes fiscales (PDF)</label>
+                <input name="anexoFiscales" type="file" accept="application/pdf" required className="mt-1 w-full" />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-stone-700">Antecedentes disciplinarios (PDF)</label>
+                <input name="anexoDisciplinarios" type="file" accept="application/pdf" required className="mt-1 w-full" />
+              </div>
+            </div>
           </div>
 
           <button

@@ -6,6 +6,7 @@ import PageSection from "@/components/PageSection";
 type Registro = {
   id: string;
   createdAt: string;
+  tipoDocumento?: string;
   nombres: string;
   cedula: string;
   expedida: string;
@@ -198,7 +199,10 @@ export default function ConvocatoriaDocentesAdminPage() {
               </div>
               <div>
                 <p className="text-xs text-stone-500">Cédula</p>
-                <p className="font-semibold">{selected.cedula}</p>
+                <p className="font-semibold">
+                  {selected.tipoDocumento ? `${selected.tipoDocumento} ` : ""}
+                  {selected.cedula}
+                </p>
               </div>
               <div>
                 <p className="text-xs text-stone-500">Cargo</p>
