@@ -98,7 +98,8 @@ async function apiFetch(path: string, options: RequestInit = {}) {
 async function requireAuth() {
   const env = getEnv();
   if (!env.user || !env.pass) return false;
-  const token = cookies().get(COOKIE_NAME)?.value ?? "";
+  const cookieStore = await cookies();
+  const token = cookieStore.get(COOKIE_NAME)?.value ?? "";
   return token ? await isValidToken(token, env.user, env.pass) : false;
 }
 
