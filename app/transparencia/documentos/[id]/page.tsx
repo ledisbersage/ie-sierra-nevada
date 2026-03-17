@@ -7,8 +7,6 @@ type DocumentoPageProps = {
   params: Promise<{ id: string }>;
 };
 
-export const runtime = "edge";
-
 export default async function DocumentoPage({ params }: DocumentoPageProps) {
   const { id } = await params;
   const normalize = (value?: string) =>

@@ -5,8 +5,6 @@ type Props = {
   params: Promise<{ sede: string }>;
 };
 
-export const runtime = "edge";
-
 export function generateStaticParams() {
   return sedes.map((sede) => ({ sede: sede.slug }));
 }
