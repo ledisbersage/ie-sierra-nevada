@@ -17,6 +17,8 @@ const normalize = (value: string) =>
     .replace(/[\u0300-\u036f]/g, "")
     .trim();
 
+export const runtime = "edge";
+
 export default async function BuscarPage({ searchParams }: Props) {
   const { q = "" } = await searchParams;
   const query = normalize(q);
