@@ -96,10 +96,7 @@ export default function DocumentosPage() {
           </Link>
         </div>
       </div>
-
-      <p className="text-sm text-stone-500 mt-4">
-        Suba los archivos PDF en la carpeta `public/documentos` con los nombres indicados en el listado.
-      </p>
+      
       <p>
         Los documentos se iran publicando segun la disponibilidad y la normativa. Para solicitar
         un documento especifico puede contactar a la institucion a traves del{" "}
