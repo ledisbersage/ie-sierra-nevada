@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PageSection from "@/components/PageSection";
 import SearchBox from "@/components/SearchBox";
+import type { SearchItem } from "@/data/busqueda";
 import { BUSQUEDA_ITEMS } from "@/data/busqueda";
 import { sedes } from "@/data/sedes";
 import { documentosInstitucionales } from "@/data/documentos";
@@ -20,7 +21,7 @@ export default async function BuscarPage({ searchParams }: Props) {
   const { q = "" } = await searchParams;
   const query = normalize(q);
 
-  const dynamicItems = [
+  const dynamicItems: SearchItem[] = [
     ...sedes.map((sede) => ({
       title: `Sede: ${sede.nombre}`,
       href: `/sedes-educativas/${sede.slug}`,
