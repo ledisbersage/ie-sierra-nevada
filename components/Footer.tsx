@@ -65,8 +65,18 @@ export default function Footer() {
             </Link>
           </div>
         </div>
-        <div className="border-t border-white/20 mt-8 pt-6 text-center text-sm text-white/80">
-          © {new Date().getFullYear()} {INSTITUCION.nombre}. Código DANE {INSTITUCION.codigoDane}. Todos los derechos reservados.
+        <div className="border-t border-white/20 mt-8 pt-6 text-center text-sm text-white/80 space-y-3">
+          <p>
+            (c) {new Date().getFullYear()} {INSTITUCION.nombre}. Codigo DANE {INSTITUCION.codigoDane}. Todos los derechos reservados.
+          </p>
+          <p className="text-white/80">
+            La Institucion Etnoeducativa Sierra Nevada trata los datos personales conforme a la Ley 1581 de 2012.
+            Puedes consultar nuestra{" "}
+            <Link href="/transparencia/documentos" className="text-institucional-amarilloClaro hover:underline">
+              Politica de Tratamiento de Datos Personales
+            </Link>{" "}
+            en este sitio web.
+          </p>
         </div>
       </div>
     </footer>

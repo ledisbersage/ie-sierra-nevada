@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { mainNav, type NavItem } from "@/lib/nav";
+import SearchBox from "@/components/SearchBox";
 
 function NavDropdown({ item }: { item: NavItem }) {
   const [open, setOpen] = useState(false);
@@ -82,26 +83,14 @@ export default function Header() {
               <NavDropdown key={item.label} item={item} />
             ))}
           </nav>
-          <div className="flex items-center gap-2 shrink-0">
-            <label className="sr-only" htmlFor="search-header">
-              Buscar en la institución
-            </label>
-            <input
-              id="search-header"
-              type="search"
-              placeholder="Buscar en la institución"
-              className="w-40 md:w-52 px-3 py-2 border border-stone-300 rounded-l-md text-sm focus:ring-2 focus:ring-institucional-azul focus:border-institucional-azul outline-none"
-              aria-label="Buscar"
+          <div className="shrink-0 w-full md:w-auto">
+            <SearchBox
+              placeholder="Buscar en la institucion"
+              className="flex items-center gap-0"
+              inputClassName="w-full md:w-48 px-3 py-2 border border-stone-300 rounded-l-md text-sm focus:ring-2 focus:ring-institucional-azul focus:border-institucional-azul outline-none"
+              buttonClassName="p-2 bg-institucional-azul text-white rounded-r-md hover:bg-institucional-azulClaro transition"
+              maxResults={6}
             />
-            <button
-              type="button"
-              className="p-2 bg-institucional-azul text-white rounded-r-md hover:bg-institucional-azulClaro transition"
-              aria-label="Buscar"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </button>
           </div>
         </div>
       </header>

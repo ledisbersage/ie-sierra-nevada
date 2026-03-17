@@ -15,7 +15,7 @@ export default function MisionVisionPage() {
         { label: "La Institución", href: "/la-institucion/historia" },
         { label: "Misión y Visión" },
       ]}
-      imageSrc="/demo-slide-2.svg"
+      imageSrc="/fotos/IMG-20231120-WA0042.jpg"
       imageAlt="Estudiantes y comunidad de la IE Sierra Nevada"
     >
       <h2>El camino (Misión)</h2>

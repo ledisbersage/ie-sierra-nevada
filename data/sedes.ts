@@ -155,4 +155,7 @@ export const sedesNavItems = sedes.map((sede) => ({
   href: `/sedes-educativas/${sede.slug}`,
 }));
 
-export const getSedeBySlug = (slug: string) => sedes.find((sede) => sede.slug === slug);
+const normalizeSlug = (value?: string) => (value ?? "").trim().toLowerCase();
+
+export const getSedeBySlug = (slug: string) =>
+  sedes.find((sede) => normalizeSlug(sede.slug) === normalizeSlug(slug));

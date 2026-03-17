@@ -14,7 +14,7 @@ export default function PrejardinPage() {
         { label: "Oferta Académica", href: "/oferta-academica/prejardin" },
         { label: "Prejardín" },
       ]}
-      imageSrc="/demo-slide-3.svg"
+      imageSrc="/fotos/IMG-20230907-WA0047.jpg"
       imageAlt="Niños y niñas en actividades lúdicas"
     >
       <p>

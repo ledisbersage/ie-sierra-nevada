@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import HeroLogo from "@/components/HeroLogo";
+import SearchBox from "@/components/SearchBox";
 import { INSTITUCION } from "@/lib/institucion";
 import { sedesCount } from "@/data/sedes";
 import NewsSlider from "@/components/NewsSlider";
@@ -10,45 +11,50 @@ const DESTACADOS = [
     title: "Gestión educativa",
     desc: "Seguimiento al aprendizaje, bienestar estudiantil y participación familiar.",
     href: "/noticias-eventos/noticias",
-    image: "/demo-slide-2.svg",
+    image: "/fotos/IMG-20231120-WA0042.jpg",
   },
   {
     title: "Proyecto pedagógico",
     desc: "Aulas vivas, lectura, arte y desarrollo de habilidades socioemocionales.",
     href: "/oferta-academica/prejardin",
-    image: "/demo-slide-3.svg",
+    image: "/fotos/IMG-20230907-WA0047.jpg",
   },
   {
     title: "Comunidad activa",
     desc: "Encuentros culturales, trabajo comunitario y liderazgo juvenil.",
     href: "/sedes-educativas/mapa",
-    image: "/demo-slide-1.svg",
+    image: "/fotos/IMG_20240319_123815.jpg",
   },
 ] as const;
 
-const GALERIA = ["/demo-slide-1.svg", "/demo-slide-2.svg", "/demo-slide-3.svg", "/demo-slide-2.svg"] as const;
+const GALERIA = [
+  "/fotos/IMG-20231120-WA0042.jpg",
+  "/fotos/IMG-20231123-WA0034.jpg",
+  "/fotos/IMG_20240319_124229.jpg",
+  "/fotos/IMG-20230918-WA0090.jpg",
+] as const;
 
 const NOTICIAS = [
   {
-    title: "Jornada de lectura y escritura en las sedes rurales",
+    title: "Colegios de La Guajira dejan de ser invisibles tras geolocalizacion",
     excerpt:
-      "Espacios de lectura en aula y biblioteca para fortalecer comprensión, creatividad y pensamiento crítico.",
-    href: "/noticias-eventos/noticias",
-    image: "/demo-slide-1.svg",
+      "Estrategia de geolocalizacion identifico 993 sedes educativas en La Guajira para orientar la gestion territorial.",
+    href: "https://www.mineducacion.gov.co/portal/salaprensa/Comunicados/427630:Colegios-de-La-Guajira-dejan-de-ser-invisibles-tras-estrategia-de-geolocalizacion-que-identifico-993-sedes-educativas",
+    image: "/fotos/IMG-20231123-WA0034.jpg",
   },
   {
-    title: "Bienestar escolar y ambientes protectores",
+    title: "Inversion nacional en infraestructura para educacion superior publica",
     excerpt:
-      "Estrategias de convivencia, salud mental y prevención de riesgos con participación de familias y docentes.",
-    href: "/noticias-eventos/noticias",
-    image: "/demo-slide-2.svg",
+      "Anuncio de inversion para fortalecer infraestructura de instituciones de educacion superior publica.",
+    href: "https://www.mineducacion.gov.co/portal/salaprensa/Comunicados/427632:Gobierno-del-cambio-invertira-566-mil-millones-en-infraestructura-para-la-educacion-superior-publica",
+    image: "/fotos/IMG_20240319_124229.jpg",
   },
   {
-    title: "Fortalecimiento de la educación rural",
+    title: "Jovenes estudiantes impulsan propuestas para la educacion superior",
     excerpt:
-      "Acciones para mejorar permanencia, recursos pedagógicos y participación comunitaria en las sedes.",
-    href: "/noticias-eventos/noticias",
-    image: "/demo-slide-3.svg",
+      "Participacion estudiantil en la construccion de politica publica para educacion superior.",
+    href: "https://www.mineducacion.gov.co/portal/salaprensa/Comunicados/427625:Jovenes-estudiantes-impulsan-propuestas-de-politica-publica-para-la-educacion-superior",
+    image: "/fotos/IMG-20231120-WA0043.jpg",
   },
 ] as const;
 
@@ -57,7 +63,7 @@ export default function HomePage() {
     <div>
       <section className="relative overflow-hidden text-white">
         <div className="absolute inset-0">
-          <Image src="/demo-slide-1.svg" alt="Banner institucional" fill className="object-cover" priority />
+          <Image src="/fotos/IMG_20240319_123815.jpg" alt="Banner institucional" fill className="object-cover" priority />
           <div className="absolute inset-0 bg-gradient-to-r from-institucional-azul/95 via-institucional-azul/70 to-transparent" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(234,179,8,0.35),_transparent_55%)]" />
         </div>
@@ -108,17 +114,8 @@ export default function HomePage() {
               </div>
 
               <div className="glass-card rounded-2xl p-4 md:p-5 text-institucional-oscuro animate-fade-right">
-                <p className="text-sm text-stone-600 mb-2">Buscar en la institución</p>
-                <div className="flex items-center gap-2">
-                  <input
-                    type="text"
-                    placeholder="Noticias, sedes, procesos..."
-                    className="flex-1 px-3 py-2 rounded-lg border border-stone-200 text-sm text-stone-700 focus:outline-none focus:ring-2 focus:ring-institucional-azulClaro/50"
-                  />
-                  <button className="px-4 py-2 rounded-lg bg-institucional-verde text-white text-sm font-medium hover:bg-institucional-verdeClaro transition">
-                    Buscar
-                  </button>
-                </div>
+                <p className="text-sm text-stone-600 mb-2">Buscar en la institucion</p>
+                <SearchBox />
               </div>
             </div>
 
@@ -240,7 +237,7 @@ export default function HomePage() {
           <div className="relative animate-fade-left">
             <div className="absolute -top-6 -left-6 w-20 h-20 rounded-full bg-institucional-amarillo/30 animate-float" />
             <div className="relative h-80 rounded-3xl overflow-hidden shadow-2xl animate-fade-up">
-              <Image src="/demo-slide-2.svg" alt="Comunidad educativa" fill className="object-cover" />
+              <Image src="/fotos/IMG-20231120-WA0042.jpg" alt="Comunidad educativa" fill className="object-cover" />
             </div>
             <div className="absolute -bottom-4 right-6 px-4 py-2 rounded-full bg-institucional-verde text-white text-sm shadow-lg">
               Comunidad activa
@@ -251,7 +248,7 @@ export default function HomePage() {
 
       <section className="max-w-6xl mx-auto px-4 py-14">
         <div className="relative h-44 rounded-3xl overflow-hidden shadow-lg mb-8 animate-fade-up">
-          <Image src="/demo-slide-3.svg" alt="Vida escolar" fill className="object-cover" />
+          <Image src="/fotos/IMG-20230907-WA0047.jpg" alt="Vida escolar" fill className="object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-institucional-azul/70 via-transparent to-transparent" />
         </div>
         <div className="grid md:grid-cols-3 gap-6 text-center">
@@ -300,7 +297,7 @@ export default function HomePage() {
                 Niveles educativos
               </h2>
               <div className="relative h-36 rounded-2xl overflow-hidden shadow-md mb-4 animate-fade-up">
-                <Image src="/demo-slide-1.svg" alt="Aula en la institución" fill className="object-cover" />
+                <Image src="/fotos/IMG_20240319_123815.jpg" alt="Aula en la institución" fill className="object-cover" />
               </div>
               <ul className="space-y-2">
                 {["Prejardín", "Jardín", "Transición", "Básica Primaria", "Básica Secundaria", "Media Académica"].map(
@@ -322,7 +319,7 @@ export default function HomePage() {
                 Accesos rápidos
               </h2>
               <div className="relative h-36 rounded-2xl overflow-hidden shadow-md mb-4 animate-fade-up">
-                <Image src="/demo-slide-2.svg" alt="Comunidad educativa" fill className="object-cover" />
+                <Image src="/fotos/IMG-20231120-WA0042.jpg" alt="Comunidad educativa" fill className="object-cover" />
               </div>
               <ul className="space-y-2">
                 <li>

@@ -16,7 +16,7 @@ export default function HistoriaPage() {
         { label: "La Institución", href: "/la-institucion/historia" },
         { label: "Historia" },
       ]}
-      imageSrc="/demo-slide-1.svg"
+      imageSrc="/fotos/IMG_20240319_123815.jpg"
       imageAlt="Paisaje de la Sierra Nevada de Santa Marta"
     >
       <p>

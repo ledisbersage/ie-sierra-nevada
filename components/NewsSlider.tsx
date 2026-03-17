@@ -35,7 +35,7 @@ export default function NewsSlider({ items, autoPlayMs = 6500 }: NewsSliderProps
   return (
     <div className="glass-card rounded-2xl overflow-hidden">
       <div className="flex items-center justify-between px-4 py-3 bg-white/80 border-b border-white/40">
-        <p className="text-sm font-semibold text-institucional-azul">Noticias del Ministerio</p>
+        <p className="text-sm font-semibold text-institucional-azul">Noticias nacionales y locales</p>
         <div className="flex items-center gap-2">
           <button
             type="button"
