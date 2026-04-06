@@ -6,6 +6,9 @@ import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import { appRoutes, type RouteItem } from "@/lib/routes";
 import SearchBox from "@/components/SearchBox";
+import Icon from "@/components/ui/Icon";
+import IconLink from "@/components/ui/IconLink";
+import { Menu, Plus, X } from "lucide-react";
 
 function NavDropdown({ item }: { item: RouteItem }) {
   const [open, setOpen] = useState(false);
@@ -21,13 +24,16 @@ function NavDropdown({ item }: { item: RouteItem }) {
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <Link
+      <IconLink
         href={item.href}
-        className="flex items-center gap-2 px-3 py-2 rounded-md text-institucional-azul font-medium hover:bg-institucional-azul/10 transition"
-      >
-        <span>{item.icon}</span>
-        <span>{item.label}</span>
-      </Link>
+        icon={item.icon}
+        label={item.label}
+        className="px-3 py-2 rounded-md text-institucional-azul font-medium hover:bg-institucional-azul/10 transition"
+        iconClassName="text-institucional-azul"
+        labelClassName="hidden lg:inline-flex text-sm font-semibold"
+        tooltipClassName="bg-white/95 text-stone-900 border border-white/30"
+        tooltipTailClassName="border-t-white/80 border-l-transparent border-r-transparent border-b-transparent"
+      />
     </div>
   );
 }
@@ -48,15 +54,18 @@ export default function Header() {
   const mobileNavItems = useMemo(
     () =>
       appRoutes.map((item) => (
-        <Link
+        <IconLink
           key={item.href}
           href={item.href}
           onClick={() => setMobileOpen(false)}
-          className="flex items-center gap-2 border-b border-stone-200 px-4 py-3 text-stone-700 font-medium hover:bg-stone-50"
-        >
-          <span>{item.icon}</span>
-          <span>{item.label}</span>
-        </Link>
+          icon={item.icon}
+          label={item.label}
+          className="w-full border-b border-stone-200 px-4 py-3 text-stone-700 font-medium hover:bg-stone-50"
+          iconClassName="text-stone-600"
+          labelClassName="inline-flex text-sm font-semibold"
+          tooltipClassName="bg-white/95 text-stone-900 border border-stone-200"
+          tooltipTailClassName="border-t-white/90 border-l-transparent border-r-transparent border-b-transparent"
+        />
       )),
     [appRoutes]
   );
@@ -95,14 +104,7 @@ export default function Header() {
               onClick={() => setMobileOpen((open) => !open)}
               aria-label="Menú"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d={mobileOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
-                />
-              </svg>
+              <Icon icon={mobileOpen ? X : Menu} size={20} className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
 
@@ -114,9 +116,10 @@ export default function Header() {
               <button
                 type="button"
                 onClick={() => setNavMenuOpen((v) => !v)}
-                className="px-3 py-2 rounded-md border border-stone-200 bg-white text-stone-700 hover:bg-stone-50 transition"
+                className="px-3 py-2 rounded-md border border-stone-200 bg-white text-stone-700 hover:bg-stone-50 transition inline-flex items-center justify-center gap-1"
               >
-                Navegación
+                <Icon icon={Plus} size={16} className="text-stone-700" aria-hidden="true" />
+                <span className="sr-only">Navegación</span>
               </button>
               {navMenuOpen && (
                 <div className="absolute right-0 mt-2 w-64 rounded-lg border border-stone-200 bg-white p-3 shadow-lg z-50">
@@ -168,9 +171,7 @@ export default function Header() {
                   className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-stone-100 text-stone-700 hover:bg-stone-200"
                   aria-label="Cerrar menú"
                 >
-                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
+                  <Icon icon={X} size={20} className="h-5 w-5" aria-hidden="true" />
                 </button>
               </div>
 

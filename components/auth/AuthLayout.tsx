@@ -1,7 +1,9 @@
-"use client";
+ "use client";
 
 import Image from "next/image";
 import Link from "next/link";
+import { authFeatures } from "@/data/authFeatures";
+import FeatureList from "@/components/ui/FeatureList";
 
 type Props = {
   title: string;
@@ -45,20 +47,7 @@ export default function AuthLayout({ title, subtitle, children }: Props) {
               <h2 className="text-3xl md:text-4xl font-bold leading-tight">{title}</h2>
               {subtitle && <p className="mt-4 text-sm md:text-base text-white/90 max-w-xl">{subtitle}</p>}
 
-              <ul className="mt-8 space-y-3 text-sm md:text-base">
-                <li className="flex items-start gap-3">
-                  <span className="mt-1 h-2 w-2 rounded-full bg-institucional-azul" />
-                  Contenido exclusivo para la comunidad institucional.
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="mt-1 h-2 w-2 rounded-full bg-institucional-azul" />
-                  Acceso a recursos, noticias y convocatorias al instante.
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="mt-1 h-2 w-2 rounded-full bg-institucional-azul" />
-                  Seguridad y confianza en el manejo de tus datos personales.
-                </li>
-              </ul>
+              <FeatureList features={authFeatures} />
 
               <div className="mt-10">
                 <Link

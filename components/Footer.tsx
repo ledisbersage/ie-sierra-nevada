@@ -1,5 +1,16 @@
 import Link from "next/link";
+import IconLink from "@/components/ui/IconLink";
 import { INSTITUCION, RECTOR } from "@/lib/institucion";
+import { routeIcons } from "@/lib/icons";
+
+const footerLinks = [
+  { label: "La Institución", href: "/la-institucion/historia", icon: routeIcons.institucion },
+  { label: "Oferta Académica", href: "/oferta-academica/prejardin", icon: routeIcons.oferta },
+  { label: "Calendario académico", href: "/noticias-eventos/calendario", icon: routeIcons.noticias },
+  { label: "Sedes", href: "/sedes-educativas/mapa", icon: routeIcons.sedes },
+  { label: "Transparencia", href: "/transparencia/documentos", icon: routeIcons.transparencia },
+  { label: "Contacto", href: "/contacto/ubicacion", icon: routeIcons.contacto },
+];
 
 export default function Footer() {
   return (
@@ -17,45 +28,37 @@ export default function Footer() {
           </div>
           <div>
             <h3 className="font-semibold text-institucional-amarilloClaro text-lg mb-3">Enlaces</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/la-institucion/historia" className="hover:text-institucional-amarilloClaro transition">
-                  La Institución
-                </Link>
-              </li>
-              <li>
-                <Link href="/oferta-academica/prejardin" className="hover:text-institucional-amarilloClaro transition">
-                  Oferta Académica
-                </Link>
-              </li>
-              <li>
-                <Link href="/noticias-eventos/calendario" className="hover:text-institucional-amarilloClaro transition">
-                  Calendario académico
-                </Link>
-              </li>
-              <li>
-                <Link href="/sedes-educativas/mapa" className="hover:text-institucional-amarilloClaro transition">
-                  Sedes
-                </Link>
-              </li>
-              <li>
-                <Link href="/transparencia/documentos" className="hover:text-institucional-amarilloClaro transition">
-                  Transparencia
-                </Link>
-              </li>
-              <li>
-                <Link href="/contacto/ubicacion" className="hover:text-institucional-amarilloClaro transition">
-                  Contacto
-                </Link>
-              </li>
+            <ul className="space-y-3 text-sm">
+              {footerLinks.map((link) => (
+                <li key={link.href}>
+                  <IconLink
+                    href={link.href}
+                    icon={link.icon}
+                    label={link.label}
+                    className="flex items-center gap-2 text-white/90 hover:text-institucional-amarilloClaro transition"
+                    iconClassName="text-white/90"
+                    labelClassName="inline-flex text-sm font-semibold"
+                    tooltipClassName="bg-white/95 text-stone-900 border border-white/30"
+                    tooltipTailClassName="border-t-white/90 border-l-transparent border-r-transparent border-b-transparent"
+                  />
+                </li>
+              ))}
             </ul>
           </div>
           <div>
             <h3 className="font-semibold text-institucional-amarilloClaro text-lg mb-3">Contacto</h3>
             <p className="text-sm">
-              {RECTOR.nombre}<br />
-              {RECTOR.cargo}<br />
-              Tel: <a href={`tel:${RECTOR.telefono.replace(/-/g, "")}`} className="text-institucional-amarilloClaro hover:underline">{RECTOR.telefono}</a>
+              {RECTOR.nombre}
+              <br />
+              {RECTOR.cargo}
+              <br />
+              Tel:{" "}
+              <a
+                href={`tel:${RECTOR.telefono.replace(/-/g, "")}`}
+                className="text-institucional-amarilloClaro hover:underline"
+              >
+                {RECTOR.telefono}
+              </a>
             </p>
             <Link
               href="/contacto/formulario"
@@ -67,13 +70,14 @@ export default function Footer() {
         </div>
         <div className="border-t border-white/20 mt-8 pt-6 text-center text-sm text-white/80 space-y-3">
           <p>
-            (c) {new Date().getFullYear()} {INSTITUCION.nombre}. Codigo DANE {INSTITUCION.codigoDane}. Todos los derechos reservados.
+            (c) {new Date().getFullYear()} {INSTITUCION.nombre}. Código DANE {INSTITUCION.codigoDane}. Todos los
+            derechos reservados.
           </p>
           <p className="text-white/80">
-            La Institucion Etnoeducativa Sierra Nevada trata los datos personales conforme a la Ley 1581 de 2012.
+            La Institución Etnoeducativa Sierra Nevada trata los datos personales conforme a la Ley 1581 de 2012.
             Puedes consultar nuestra{" "}
             <Link href="/transparencia/documentos" className="text-institucional-amarilloClaro hover:underline">
-              Politica de Tratamiento de Datos Personales
+              Política de Tratamiento de Datos Personales
             </Link>{" "}
             en este sitio web.
           </p>
