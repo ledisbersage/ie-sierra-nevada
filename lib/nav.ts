@@ -13,6 +13,7 @@ export const mainNav: NavItem[] = [
   },
   {
     label: "La Institución",
+    href: "/la-institucion",
     children: [
       { label: "Historia", href: "/la-institucion/historia" },
       { label: "Misión y Visión", href: "/la-institucion/mision-vision" },
@@ -20,6 +21,10 @@ export const mainNav: NavItem[] = [
       { label: "Símbolos Institucionales", href: "/la-institucion/simbolos-institucionales" },
       { label: "Equipo Directivo", href: "/la-institucion/equipo-directivo" },
     ],
+  },
+  {
+    label: "Acceso",
+    href: "/autenticacion",
   },
   {
     label: "Oferta Académica",
@@ -67,6 +72,8 @@ export const mainNav: NavItem[] = [
       { label: "Transparencia", href: "/transparencia/documentos" },
       { label: "Atención al ciudadano", href: "/contacto/formulario" },
       { label: "Ubicación y teléfonos", href: "/contacto/ubicacion" },
+      { label: "Acceso", href: "/autenticacion" },
+      { label: "Panel", href: "/dashboard" },
     ],
   },
 ];

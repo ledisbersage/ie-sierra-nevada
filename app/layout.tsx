@@ -1,9 +1,9 @@
 ﻿import type { Metadata, Viewport } from "next";
 import { Montserrat, Poppins } from "next/font/google";
 import "./globals.css";
-import TopBar from "@/components/TopBar";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import SiteShell from "@/components/SiteShell";
+import PageTransition from "@/components/PageTransition";
+import TopProgress from "@/components/TopProgress";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -100,10 +100,12 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${montserrat.variable} ${poppins.variable} min-h-screen flex flex-col`}>
-        <TopBar />
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <TopProgress />
+        <SiteShell>
+          <main className="flex-1">
+            <PageTransition>{children}</PageTransition>
+          </main>
+        </SiteShell>
       </body>
     </html>
   );
