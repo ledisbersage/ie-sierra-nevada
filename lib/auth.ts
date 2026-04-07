@@ -53,13 +53,13 @@ export async function isValidToken(token: string, user: string, secret: string) 
   return age >= 0 && age <= MAX_AGE_SECONDS * 1000;
 }
 
-export function getCookieToken() {
-  const cookieStore = cookies();
+export async function getCookieToken() {
+  const cookieStore = await cookies();
   return cookieStore.get(COOKIE_NAME)?.value ?? "";
 }
 
 export async function isSessionValid() {
   const { user, pass } = getAuthConfig();
-  const token = getCookieToken();
+  const token = await getCookieToken();
   return token ? isValidToken(token, user, pass) : false;
 }

@@ -10,7 +10,7 @@ export default function TopProgress() {
   const pathname = usePathname();
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(false);
-  const timerRef = useRef<ReturnType<typeof window.setInterval> | null>(null);
+  const timerRef = useRef<number | null>(null);
   const firstRender = useRef(true);
 
   useEffect(() => {

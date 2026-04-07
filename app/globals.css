@@ -1,9 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap");
 @import "reactflow/dist/style.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
+  --font-body: "Montserrat", "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Poppins", "Inter", "Segoe UI", system-ui, sans-serif;
   --azul-institucional: #1e5f8c;
   --azul-claro: #5ba3d0;
   --cielo: #93c5fd;

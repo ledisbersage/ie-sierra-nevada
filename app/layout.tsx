@@ -1,21 +1,8 @@
-﻿import type { Metadata, Viewport } from "next";
-import { Montserrat, Poppins } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import SiteShell from "@/components/SiteShell";
 import PageTransition from "@/components/PageTransition";
 import TopProgress from "@/components/TopProgress";
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-body",
-});
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  variable: "--font-display",
-});
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://sierranevada.edu.co";
 
@@ -99,7 +86,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className={`${montserrat.variable} ${poppins.variable} min-h-screen flex flex-col`}>
+      <body className="min-h-screen flex flex-col">
         <TopProgress />
         <SiteShell>
           <main className="flex-1">

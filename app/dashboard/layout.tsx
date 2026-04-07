@@ -5,7 +5,7 @@ import { COOKIE_NAME, getAuthConfig, isValidToken } from "@/lib/auth";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { user, pass } = getAuthConfig();
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const token = cookieStore.get(COOKIE_NAME)?.value ?? "";
   const ok = token ? await isValidToken(token, user, pass) : false;
 

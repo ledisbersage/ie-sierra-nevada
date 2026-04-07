@@ -13,6 +13,7 @@ type IconLinkProps = LinkProps & {
   labelClassName?: string;
   tooltipClassName?: string;
   tooltipTailClassName?: string;
+  ariaLabel?: string;
 };
 
 export default function IconLink({
@@ -24,6 +25,7 @@ export default function IconLink({
   labelClassName = "hidden lg:inline-flex text-sm font-semibold",
   tooltipClassName = "bg-white/90 text-stone-900 border border-white/30",
   tooltipTailClassName = "border-t-white/90 border-l-transparent border-r-transparent border-b-transparent",
+  ariaLabel,
   ...linkProps
 }: IconLinkProps) {
   const tooltipWrapperClasses =
@@ -35,7 +37,7 @@ export default function IconLink({
     <Link
       {...linkProps}
       className={`group relative inline-flex items-center gap-2 ${className}`}
-      aria-label={linkProps["aria-label"] ?? label}
+      aria-label={ariaLabel ?? label}
     >
       <Icon icon={icon} size={iconSize} className={iconClassName} aria-hidden="true" />
       <span className={labelTextClass}>{label}</span>
