@@ -22,11 +22,6 @@ export default function FormularioPage() {
         responder su mensaje.
       </p>
       <ContactForm />
-      <p className="text-stone-500 text-sm mt-6">
-        Nota: este formulario es de ejemplo. Para que los mensajes lleguen a la institución debe
-        conectarse a un servicio de correo o a una base de datos según la infraestructura
-        disponible.
-      </p>
     </PageSection>
   );
 }
