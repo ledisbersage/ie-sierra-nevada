@@ -52,12 +52,12 @@ export default function Footer() {
               <br />
               {RECTOR.cargo}
               <br />
-              Tel:{" "}
+              Correo institucional:{" "}
               <a
-                href={`tel:${RECTOR.telefono.replace(/-/g, "")}`}
+                href="mailto:contacto@sierranevada.edu.co"
                 className="text-institucional-amarilloClaro hover:underline"
               >
-                {RECTOR.telefono}
+                contacto@sierranevada.edu.co
               </a>
             </p>
             <Link
