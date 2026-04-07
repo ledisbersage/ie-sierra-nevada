@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import DashboardShell from "@/components/dashboard/DashboardShell";
